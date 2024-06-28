@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma de Desarrollador</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+        }
+        .modal, .container {
+            display: none;
+            position: absolute;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            background: #fff;
+            padding: 40px;
+            border: 10px solid #333;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out;
+        }
+        .modal.active, .container.active {
+            display: block;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #555;
+        }
+        .name-header {
+            font-size: 1.8em;
+            margin: 20px 0;
+            color: #333;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #777;
+        }
+        .name-input {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+        }
+        .submit-button, .celebrate-button {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #0072ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .submit-button:hover, .celebrate-button:hover {
+            background-color: #005bb5;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes textZoom {
+            from { transform: scale(0.5); }
+            to { transform: scale(1); }
+        }
+        #confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal active" id="name-modal">
+        <h1>Hola, introduce tu nombre c:</h1>
+        <input class="name-input" type="text" id="name-input" placeholder="Introduce tu nombre">
+        <button class="submit-button" onclick="submitName()">Enviar</button>
+    </div>
+    <div class="container" id="diploma">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" alt="Git Logo">
+        </div>
+        <h1>¡Felicidades!</h1>
+        <p class="name-header" id="name-display">[Nombre]</p>
+        <p>¡Ya eres un desarrollador!</p>
+        <p>Hiciste tu primer merge.</p>
+        <button class="celebrate-button" onclick="celebrate()">Presione para celebrar</button>
+        <div class="footer">
+            <p>No te rindas, ¡el viaje apenas comienza!</p>
+        </div>
+    </div>
+    <canvas id="confetti-canvas"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function submitName() {
+            const name = document.getElementById('name-input').value;
+            if (name) {
+                document.getElementById('name-display').innerText = name;
+                document.getElementById('name-modal').classList.remove('active');
+                document.getElementById('diploma').classList.add('active');
+            } else {
+                alert('Por favor, introduce tu nombre.');
+            }
+        }
+
+        function celebrate() {
+            const confettiCanvas = document.getElementById('confetti-canvas');
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                shapes: ['square', 'circle'],
+                colors: ['#bb0000', '#ffffff']
+            });
+        }
+    </script>
+</body>
+</html>
